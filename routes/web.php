@@ -16,5 +16,9 @@ use App\Http\Controllers\CustomizedAuthController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login',[CustomizedAuthController::class,'login']);
-Route::get('/registration',[CustomizedAuthController::class,'registration']);
+Route::get('/login',[CustomizedAuthController::class,'login'])->middleware('alreadyLoggedIn');
+Route::get('/registration',[CustomizedAuthController::class,'registration'])->middleware('alreadyLoggedIn');
+Route::post('/register-user',[CustomizedAuthController::class,'registerUser'])->name('register-user');
+Route::post('/login-user',[CustomizedAuthController::class,'loginUser'])->name('login-user');
+Route::get('/dashboard',[CustomizedAuthController::class,'dashboard']);
+Route::get('/logout',[CustomizedAuthController::class,'logout']);

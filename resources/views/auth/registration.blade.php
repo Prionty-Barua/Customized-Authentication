@@ -12,18 +12,28 @@
             <div class="col-md-4 col-md-offset-4" style="margin-top:20px;">
                 <h4>Registration</h4>
                 <!-- <hr> --><br>
-                <form>
+                <form action="{{route('register-user')}}" method="POST">
+                    @if(Session::has('success'))
+                    <div class="alert alert-success">{{Session::get('success')}}</div>
+                    @endif
+                    @if(Session::has('fail'))
+                    <div class="alert alert-danger">{{Session::get('fail')}}</div>
+                    @endif
+                    @csrf
                     <div class="form-group">
                         <label for="name">Full name</lable>
-                            <input type="text" class="form-control" placeholder="" name="name">
+                        <input type="text" class="form-control" placeholder="" name="name" value="{{old('name')}}">
+                        <span class="text-danger">@error('name') {{$message}} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</lable>
-                            <input type="email" class="form-control" placeholder="" name="email">
+                        <input type="email" class="form-control" placeholder="" name="email" value="{{old('email')}}">
+                        <span class="text-danger">@error('email') {{$message}} @enderror</span>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</lable>
-                            <input type="password" class="form-control" placeholder="" name="password">
+                        <input type="password" class="form-control" placeholder="" name="password">
+                        <span class="text-danger">@error('password') {{$message}} @enderror</span>
                     </div><br>
                     <div class="form-group">
                         <button class="btn btn-block btn-primary" type="submit"><a href=""></a>Create Account</button>
